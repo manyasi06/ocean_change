@@ -12,7 +12,7 @@ import 'report_marker.dart';
 class BaseMap extends StatefulWidget {
   final List<ReportMarker> reportMarkers;
   final bool adminStatus;
-  BaseMap({super.key, required this.reportMarkers, required this.adminStatus});
+  const BaseMap({super.key, required this.reportMarkers, required this.adminStatus});
 
   @override
   State<BaseMap> createState() => _BaseMapState();

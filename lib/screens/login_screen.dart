@@ -63,27 +63,42 @@ class _LoginScreenState extends State<LoginScreen> {
                   onSaved: (value) {
                     userData.password = value!;
                   }),
-              ElevatedButton(
-                  onPressed: _emailSignIn, child: const Text("Sign In")),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(400, 75)
+                  ),
+                    onPressed: _emailSignIn,
+                    child: const Text("Sign In",
+                    style:
+                      TextStyle(fontSize:30, fontWeight: FontWeight.bold)
+                    )),
+              ),
               ElevatedButton(
                   onPressed: () => Navigator.pushNamed(
                       context, PasswordResetScreen.routeName),
                   child: const Text("Forgot Password?")),
               const Spacer(),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 6),
+                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 10),
                   child: Platform.isAndroid
-                      ? const Text(
-                          "New user who can't sign in with a Google account?")
-                      : Container()),
+                      ? const Text("New user who can't sign in with a Google account?",
+                          style: TextStyle(fontSize: 15))
+                      : Container()
+              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 50),
                 child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(300, 75)),
                     onPressed: () {
                       Navigator.pushNamed(
                           context, CreateAccountScreen.routeName);
                     },
-                    child: const Text("Create Account")),
+                    child: const Text("Create Account",
+                        style:
+                        TextStyle(fontSize:20, fontWeight: FontWeight.bold))),
               ),
             ],
           ),
@@ -107,11 +122,11 @@ class _LoginScreenState extends State<LoginScreen> {
         bool found = false;
        await userDocs.then((QuerySnapshot value){
           if (value.size == 0){
-            print("Not found user");
+            const Text("User not found");
             return;
           }
           for( var element in value.docs){
-            print(element.get("email"));
+            Text(element.get("email"));
             if(element.get("email") == userData.email){
               found = true;
             }

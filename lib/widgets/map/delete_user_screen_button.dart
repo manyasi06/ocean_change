@@ -9,7 +9,7 @@ class DeleteUserButton extends StatelessWidget {
     return TextButton(
       onPressed: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => DeleteUserScreen()));
+            MaterialPageRoute(builder: (context) => const DeleteUserScreen()));
       },
       style: TextButton.styleFrom(foregroundColor: Colors.white),
       child: const Text('DeleteUser'),

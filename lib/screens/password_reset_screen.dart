@@ -32,7 +32,8 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                   validator: (value) {
                     if (value!.isEmpty || !value.contains('@')) {
                       return "Please enter an email";
-                    } else {
+                    }
+                    else {
                       return null;
                     }
                   },

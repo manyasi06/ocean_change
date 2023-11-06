@@ -30,6 +30,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   child:
                       Text("Enter the fields below to create a new account")),
               TextFormField(
+                  key: const Key('email_field'),
                   decoration: const InputDecoration(labelText: "Email"),
                   validator: (value) {
                     if (value!.isEmpty || !value.contains('@')) {
@@ -42,12 +43,22 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     userData.email = value!;
                   }),
               TextFormField(
+                  key: const Key('password_field'),
                   decoration: const InputDecoration(labelText: "Password"),
                   obscureText: true,
                   validator: (value) {
+                    RegExp check = RegExp(r'^(?=.*\d)(?=.*[!@#$%^&*(),.?\":{}|<>])(?=.*[a-z])(?=.*[A-Z]).{8,}$');
                     if (value!.isEmpty) {
                       return "Please enter a password";
-                    } else {
+                    } 
+                    else if (check.hasMatch(value) == false) {
+                      return "Password Requirements:\n"
+                             "- Must be at least 8 characters long\n"
+                             "- Must contain uppercase and lowercase letters\n"
+                             "- Must contain at least one digit (0-9)\n"
+                             "- Must contain at least one special character [ !@#\$%^&*(),.?\":{}|<> ]";
+                    }
+                    else {
                       return null;
                     }
                   },
@@ -69,7 +80,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       formKey.currentState!.save();
       try {
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: userData.email.toString().trim()!, password: userData.password!);
+            email: userData.email.toString().trim(), password: userData.password!);
       } on FirebaseAuthException catch (e) {
         if(e.code == 'email-already-in-use'){
           showFireBaseAuthError(context, "This account has been deactivated");

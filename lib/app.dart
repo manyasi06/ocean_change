@@ -29,7 +29,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Ocean Change',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan),
       ),
       routes: App.routes,
     );
