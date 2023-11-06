@@ -13,4 +13,4 @@ If working in emulatar mode for andriod add the following to a file named networ
 </network-security-config>
 ```
 
-This also only for andriod
+This also only for andriod.
