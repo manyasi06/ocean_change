@@ -10,5 +10,9 @@ If working in emulatar mode for andriod add the following to a file named networ
     <domain-config cleartextTrafficPermitted="true">
         <domain>10.0.2.2</domain>
     </domain-config>
-</network-security-config>
-```
+
+
+
+
+This also only for andriod.
+
