@@ -116,10 +116,10 @@ class _LoginScreenState extends State<LoginScreen> {
       
       var userDocs = FirebaseFirestore.instance
             .collection("users")
-            .where("email", isEqualTo: userData.email)
-            .get();
+            // .where("email", isEqualTo: userData.email.trim())
+            .get(const GetOptions(source: Source.server));
 
-        bool found = false;
+        var found = false;
        await userDocs.then((QuerySnapshot value){
           if (value.size == 0){
             const Text("User not found");
@@ -131,11 +131,11 @@ class _LoginScreenState extends State<LoginScreen> {
               found = true;
             }
           }
-        });
-        
-        if(!found){
-          throw Exception('User not registered for app');
-        }
+        }, onError: (e) => print("Error Completeing getting the user"));
+        print("\nThis is found $found");
+        // if(!found){
+        //   throw Exception('User not registered for app');
+        // }
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: userData.email!, password: userData.password!);
       } on FirebaseAuthException catch (e) {

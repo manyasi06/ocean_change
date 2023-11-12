@@ -1,8 +1,10 @@
 class Observation {
   String name;
   List<Map<String, String>>? species;
+ 
 
-  Observation({required this.name, this.species});
+  Observation({required this.name, this.species,});
+ 
 
   factory Observation.fromFirestore(Map document) {
     List<Map<String, String>> speciesList = [];
