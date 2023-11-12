@@ -47,7 +47,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   decoration: const InputDecoration(labelText: "Password"),
                   obscureText: true,
                   validator: (value) {
-                    RegExp check = RegExp(r'^(?=.*\d)(?=.*[!@#$%^&*(),.?\":{}|<>])(?=.*[a-z])(?=.*[A-Z]).{8,}$');
+                    RegExp check = RegExp(r'^(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-z])(?=.*[A-Z]).{8,}$');
                     if (value!.isEmpty) {
                       return "Please enter a password";
                     } 
@@ -80,7 +80,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       formKey.currentState!.save();
       try {
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: userData.email.toString().trim()!, password: userData.password!);
+            email: userData.email.toString().trim(), password: userData.password!);
             FirebaseFirestore.instance.collection("users").add({
           'admin': userData.adminStatus, //default is false on creation
           'email': userData.email,
