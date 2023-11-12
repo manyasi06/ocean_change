@@ -10,9 +10,17 @@ If working in emulatar mode for andriod add the following to a file named networ
     <domain-config cleartextTrafficPermitted="true">
         <domain>10.0.2.2</domain>
     </domain-config>
+```
+
+Additional configuration create a .env file and the following env to connect to firebase emulator:
+```
+LOCAL_FIRESTORE="false" //if set to true firebase will connect local.
+```
 
 
 
 
-This also only for andriod.
+
+
+
 
