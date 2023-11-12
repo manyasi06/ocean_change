@@ -1,2 +1,3 @@
 - 11/3/23 Adding changelog tracker
 - 11/5/23 Finish up emulator
+- 11/11/23 Changes to create_account_screen based on warnings
