@@ -1,2 +1,3 @@
 - 11/3/23 Adding changelog tracker
 - 11/5/23 Finish up emulator
+- 11/12/23 Setup Github actions flutter
