@@ -37,6 +37,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
             Padding(
               padding: const EdgeInsets.only(bottom: 50.0),
               child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(300, 75)),
                   onPressed: () {
                     currentUser!.sendEmailVerification();
                     showVerificationEmailSent(context);
@@ -45,6 +47,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
             ),
             const Text("Finished verifying your email?"),
             ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(300, 75)),
                 onPressed: () {
                   currentUser!.reload();
                   // delay to not throw error unless not verified

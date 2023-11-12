@@ -59,12 +59,12 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
           options: MapOptions(
             crs: const Epsg3857(),                 //coordinate reference system
             center: LatLng(44.1, -124.75),
-            boundsOptions: const FitBoundsOptions(padding: EdgeInsets.all(8.0)),
+            //boundsOptions: const FitBoundsOptions(padding: EdgeInsets.all(8.0)),
             zoom: 10.0,
-            minZoom: 8.0,
+            minZoom: 7.0,
             maxZoom: 12.0,
 
-            maxBounds: LatLngBounds(LatLng(46.3, -123.50), LatLng(44, -124)),
+            maxBounds: LatLngBounds(LatLng(41.9, -127.0), LatLng(46.3, -123.50)),
             nePanBoundary: LatLng(46.3, -123.50),
             swPanBoundary: LatLng(41.9, -127.0),
 
@@ -107,13 +107,10 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
 
           ),
           nonRotatedChildren: const [
-            SimpleAttributionWidget(source: Text('OpenStreetMap')),
+            SimpleAttributionWidget(source: Text('mapzen, NOAA, OpenStreetMap')),
           ],
           children: [
             TileLayer(
-              minZoom: 8,
-              maxZoom: 12,
-              tileBounds: LatLngBounds(LatLng(46.3, -123.50),  LatLng(44, -124)),
               tileProvider: AssetTileProvider(),
               urlTemplate: 'assets/map/{z}/{x}/{y}.png',
               tms: false,

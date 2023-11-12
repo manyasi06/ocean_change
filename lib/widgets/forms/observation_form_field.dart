@@ -60,7 +60,7 @@ class _ObservationFormFieldState extends State<ObservationFormField> {
         ),
         Row(
           children: [
-            const Text('Details: '),
+            const Text('Observation Details: '),
             SpeciesFormField(
                 userReport: widget.userReport,
                 chosenObservation: chosenObservation),
