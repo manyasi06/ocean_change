@@ -27,4 +27,4 @@ jobs:
 
     - run: |
             flutter pub get
-            flutter test --plain-name "Testing flutter oceanapp"
+            flutter test 
