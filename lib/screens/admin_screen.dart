@@ -10,6 +10,8 @@ import 'package:ocean_change/models/user_data.dart';
 
 import '../widgets/map/delete_user_screen_button.dart';
 
+// Screen for admins to view and look up users
+
 class AdminScreen extends StatefulWidget {
   static const String routeName = 'AdminScreen';
 

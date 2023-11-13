@@ -44,6 +44,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
         ModalRoute.of(context)?.settings.arguments as UserReport;
 
     updatePositionTarget() {
+      // Updates location in user report
       setState(() {
         _position = _mapController.latLngToScreenPoint(LatLng(
             userReport.geopoint!.latitude, userReport.geopoint!.longitude));
@@ -55,6 +56,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
       resizeToAvoidBottomInset: false,
       body: Stack(children: [
         FlutterMap(
+          // map display for screen
           mapController: _mapController,
           options: MapOptions(
             crs: const Epsg3857(),                 //coordinate reference system
@@ -120,6 +122,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
         ),
         LatLongTarget(position: _position),
         LatLongBox(
+          // Shows lat/long location
             latController: _latController,
             userReport: userReport,
             longController: _longController,
