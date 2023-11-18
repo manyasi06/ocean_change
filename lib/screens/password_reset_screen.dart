@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/login/show_login_error.dart';
 
+// Page where users can choose to get sent a reset password email
+// Password reset is handled by firebaseauth and is not subject to same password
+// restrictions as create account page
+
 class PasswordResetScreen extends StatefulWidget {
   static const String routeName = 'PasswordResetScreen';
   const PasswordResetScreen({super.key});
@@ -32,7 +36,8 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                   validator: (value) {
                     if (value!.isEmpty || !value.contains('@')) {
                       return "Please enter an email";
-                    } else {
+                    }
+                    else {
                       return null;
                     }
                   },

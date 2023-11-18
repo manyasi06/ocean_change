@@ -15,6 +15,8 @@ import '../widgets/map/csv_export_button.dart';
 import '../widgets/map/report_marker_icon.dart';
 import '../widgets/map/report_marker.dart';
 
+// Main page of app where users can view previous reports and create new ones
+
 class MapScreen extends StatefulWidget {
   static const String routeName = 'MapScreen';
 
@@ -161,7 +163,8 @@ class MapScreenState extends State<MapScreen> {
                 if (snapshot.hasData) {
                   for (final docSnapshot in snapshot.data!.docs) {
                     final report = UserReport.fromFirestore(
-                        docSnapshot.data(), docSnapshot.id);
+                        docSnapshot.data(),
+                        docSnapshot.id);
                     reportMarkers.add(ReportMarker(
                         userReport: report,
                         builder: (context) =>

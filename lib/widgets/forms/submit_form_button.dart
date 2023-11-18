@@ -53,8 +53,10 @@ class _SubmitFormButton extends State<SubmitFormButton> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(20.0),
           child: ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+                minimumSize: const Size(300, 75)),
             onPressed: _uploading
                 ? null
                 : () async {

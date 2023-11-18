@@ -9,7 +9,11 @@ import 'screens/create_report_screen.dart';
 import 'screens/location_picker_screen.dart';
 import 'screens/admin_screen.dart';
 
+// Sets up App with routes and themes
+// Created as MaterialApp at top level
+
 class App extends StatelessWidget {
+  // Set up routes for screen navigation
   static final routes = {
     LandingScreen.routeName: (context) => const LandingScreen(),
     LoginScreen.routeName: (context) => const LoginScreen(),
@@ -29,7 +33,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Ocean Change',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan),
       ),
       routes: App.routes,
     );

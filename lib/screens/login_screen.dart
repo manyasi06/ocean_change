@@ -9,11 +9,15 @@ import '../models/user_data.dart';
 import '../widgets/login/show_login_error.dart';
 import '../widgets/login/google_sign_in_button.dart';
 
+// Login screen for users using google sign in for android and firebase auth
+// for other sign in methods
+
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'LoginScreen';
   const LoginScreen({super.key});
 
   @override
+  // Creates the mutable state for this widget at a given location in the tree
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
@@ -32,13 +36,16 @@ class _LoginScreenState extends State<LoginScreen> {
           key: formKey,
           child: Column(
             children: [
+              // Shows Google sign in button for Android
               Platform.isAndroid ? const GoogleSignInButton() : Container(),
               Padding(
+                // Text for sign in based on platform
                   padding: const EdgeInsets.fromLTRB(0, 24, 0, 6),
                   child: Platform.isAndroid
                       ? const Text("Or sign in with email and password.")
                       : const Text('Sign in with email and password.')),
               TextFormField(
+                // Saves entered email into userData.email
                   decoration: const InputDecoration(labelText: "Email"),
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -51,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     userData.email = value!;
                   }),
               TextFormField(
+                // Saves entered password into userData.password
                   decoration: const InputDecoration(labelText: "Password"),
                   obscureText: true,
                   validator: (value) {
@@ -63,27 +71,49 @@ class _LoginScreenState extends State<LoginScreen> {
                   onSaved: (value) {
                     userData.password = value!;
                   }),
+              Padding(
+                // SignIn Button
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(400, 75)
+                      ),
+                      onPressed: _emailSignIn,
+                      child: const Text("Sign In",
+                          style:
+                          TextStyle(fontSize:30, fontWeight: FontWeight.bold)
+                      )
+                  ),
+              ),
               ElevatedButton(
-                  onPressed: _emailSignIn, child: const Text("Sign In")),
-              ElevatedButton(
+                //Forgot Password Button
                   onPressed: () => Navigator.pushNamed(
                       context, PasswordResetScreen.routeName),
-                  child: const Text("Forgot Password?")),
+                  child: const Text("Forgot Password?")
+              ),
               const Spacer(),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 6),
+                // Create User Text
+                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 10),
                   child: Platform.isAndroid
-                      ? const Text(
-                          "New user who can't sign in with a Google account?")
-                      : Container()),
+                      ? const Text("New user who can't sign in with a Google account?",
+                      style: TextStyle(fontSize: 15))
+                      : Container()
+              ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 50),
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(
-                          context, CreateAccountScreen.routeName);
-                    },
-                    child: const Text("Create Account")),
+                // Create Account Button
+                  padding: const EdgeInsets.only(bottom: 50),
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(300, 75)),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, CreateAccountScreen.routeName);
+                        },
+                      child: const Text("Create Account",
+                          style:
+                          TextStyle(fontSize:20, fontWeight: FontWeight.bold))
+                  ),
               ),
             ],
           ),
@@ -93,25 +123,27 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future _emailSignIn() async {
+    // checks if formKey fields above are filled in
     if (formKey.currentState!.validate()) {
+      // saves formKey fields
       formKey.currentState!.save();
       try {
-
-      
-      
-      var userDocs = FirebaseFirestore.instance
+        // connects to firestore users
+        var userDocs = FirebaseFirestore.instance
             .collection("users")
             // .where("email", isEqualTo: userData.email.trim())
             .get(const GetOptions(source: Source.server));
 
         var found = false;
-       await userDocs.then((QuerySnapshot value){
-          // if (value.size == 0){
-          //   print("Not found user");
-          //   return;
-          // }
+
+        // matches email to firestore users
+        await userDocs.then((QuerySnapshot value){
+          if (value.size == 0){
+            const Text("User not found");
+            return;
+          }
           for( var element in value.docs){
-            print(element.get("email"));
+            Text(element.get("email"));
             if(element.get("email") == userData.email){
               found = true;
             }
@@ -121,6 +153,8 @@ class _LoginScreenState extends State<LoginScreen> {
         // if(!found){
         //   throw Exception('User not registered for app');
         // }
+
+        // attempts login with FirebaseAuth
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: userData.email!, password: userData.password!);
       } on FirebaseAuthException catch (e) {

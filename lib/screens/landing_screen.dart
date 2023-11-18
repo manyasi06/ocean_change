@@ -16,14 +16,18 @@ class LandingScreen extends StatelessWidget {
         stream: FirebaseAuth.instance.userChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            // I believe this prevents black screen from appearing on startup
             Navigator.maybePop(context);
+            // if account has been created but email not verified
             if (snapshot.data!.emailVerified == false) {
               return const EmailVerificationScreen();
             }
+            // if account is logged in
             else {
               return const MapScreen();
             }
           } else {
+            // if account is logged out or no user has been created
             Navigator.maybePop(context);
             return const LoginScreen();
           }
