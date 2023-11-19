@@ -8,7 +8,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocean_change/app.dart';
+import 'package:ocean_change/constants.dart';
 import 'package:ocean_change/screens/login_screen.dart';
+import 'package:ocean_change/widgets/map/export_csv_screen.dart';
 
  // TODO this test is broken
 
@@ -26,21 +28,18 @@ void main() {
     expect(title.description, 'text "Ocean Change"');
 
   });
-  
-  // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-  //   // Build our app and trigger a frame.
-  //   await tester.pumpWidget(const App());
 
-  //   // Verify that our counter starts at 0.
-  //   expect(find.text('0'), findsOneWidget);
-  //   expect(find.text('1'), findsNothing);
+  testWidgets("TestCsvButton", (widgetTester) async{
+    await widgetTester.pumpWidget(const MaterialApp(
+        home: Material(
+          child: ExportCsvScreen(),
+        ),
+    ));
 
-  //   // Tap the '+' icon and trigger a frame.
-  //   await tester.tap(find.byIcon(Icons.add));
-  //   await tester.pump();
+    final checkbox =find.byType(Checkbox);
+    expect(checkbox, findsOneWidget);
 
-  //   // Verify that our counter has incremented.
-  //   expect(find.text('0'), findsNothing);
-  //   expect(find.text('1'), findsOneWidget);
-  // });
+    final button = find.byType(ElevatedButton);
+    expect(button, findsOneWidget);
+  });
 }
