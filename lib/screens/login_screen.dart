@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:logger/logger.dart';
 import 'package:ocean_change/screens/create_account_screen.dart';
 import 'package:ocean_change/screens/password_reset_screen.dart';
 import '../models/user_data.dart';
@@ -123,6 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future _emailSignIn() async {
+    var logger = Logger();
     // checks if formKey fields above are filled in
     if (formKey.currentState!.validate()) {
       // saves formKey fields
@@ -141,20 +143,22 @@ class _LoginScreenState extends State<LoginScreen> {
           if (value.size == 0){
             const Text("User not found");
             return;
-          }
-          for( var element in value.docs){
-            Text(element.get("email"));
-            if(element.get("email") == userData.email){
-              found = true;
+          }else {
+            for (var element in value.docs) {
+              Text(element.get("email"));
+              if (element.get("email") == userData.email) {
+                found = true;
+              }
             }
           }
         }, onError: (e) => print("Error Completeing getting the user"));
         print("\nThis is found $found");
-        // if(!found){
-        //   throw Exception('User not registered for app');
-        // }
+        if(!found){
+          throw Exception('User not registered for app');
+        }
 
         // attempts login with FirebaseAuth
+
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: userData.email!, password: userData.password!);
       } on FirebaseAuthException catch (e) {
