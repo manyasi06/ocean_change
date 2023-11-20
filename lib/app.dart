@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:ocean_change/constants.dart';
 import 'package:ocean_change/screens/create_account_screen.dart';
 import 'package:ocean_change/screens/delete_user_screen.dart';
 import 'package:ocean_change/screens/landing_screen.dart';
 import 'package:ocean_change/screens/login_screen.dart';
 import 'package:ocean_change/screens/password_reset_screen.dart';
+import 'package:ocean_change/widgets/map/export_csv_screen.dart';
 import 'screens/view_report_screen.dart';
 import 'screens/create_report_screen.dart';
 import 'screens/location_picker_screen.dart';
@@ -23,7 +25,8 @@ class App extends StatelessWidget {
     LocationPickerScreen.routeName: (context) => const LocationPickerScreen(),
     AdminScreen.routeName: (context) => const AdminScreen(),
     PasswordResetScreen.routeName: (context) => const PasswordResetScreen(),
-    DeleteUserScreen.routeName: (context) => const DeleteUserScreen()
+    DeleteUserScreen.routeName: (context) => const DeleteUserScreen(),
+    ExportCsvScreen.routeName: (context) => const ExportCsvScreen()
   };
 
   const App({super.key});
@@ -31,7 +34,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Ocean Change',
+      title: appBarTitle,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan),
       ),
@@ -39,3 +42,4 @@ class App extends StatelessWidget {
     );
   }
 }
+

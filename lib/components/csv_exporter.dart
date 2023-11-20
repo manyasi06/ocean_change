@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -46,4 +48,23 @@ void exportCSV() async {
   XFile csvXFile = await generateCSV(csvString);
 
   Share.shareXFiles([csvXFile]);
+}
+
+void exportCSVByUser(bool checkforfullReport) async{
+  User? user =FirebaseAuth.instance.currentUser;
+  if (checkforfullReport && user != null) {
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+    await FirebaseFirestore.instance.collection('reports').where(
+        "user", isEqualTo: user.email).get();
+
+    List<List<dynamic>> csvList = convertQuerySnapshotToList(querySnapshot);
+
+    String csvString = convertToCSVString(csvList);
+
+    XFile csvXFile = await generateCSV(csvString);
+
+    Share.shareXFiles([csvXFile]);
+  }else{
+    exportCSV();
+  }
 }
