@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ocean_change/constants.dart';
 import '../models/user_data.dart';
 import '../widgets/login/show_login_error.dart';
 
@@ -21,7 +22,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Ocean Change')),
+      appBar: AppBar(title: const Text(appBarTitle)),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Form(
