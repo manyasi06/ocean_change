@@ -6,4 +6,5 @@
 - 11/13/23 Began commenting code throughout project (mostly in lib/screens)
 - 11/17/23 Add tests and update the filter csv export to only to filter by user who created.
 - 11/19/23 Fix block user functionality
+- 11/19/23 Changed number of observations to a dropdown. Maintained working validation.
 

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:ocean_change/models/user_report.dart';
 
 class NumberOfObservationFormField extends StatefulWidget {
   const NumberOfObservationFormField({super.key, required this.userReport});
-
   final UserReport userReport;
 
   @override
@@ -12,30 +10,56 @@ class NumberOfObservationFormField extends StatefulWidget {
       _NumberOfObservationFormFieldState();
 }
 
-class _NumberOfObservationFormFieldState
-    extends State<NumberOfObservationFormField> {
+class _NumberOfObservationFormFieldState extends State<NumberOfObservationFormField> {
+  // List for dropdown values
+  final List<String> _obsNumber = <String>[
+    'Single (1)',
+    'A Few (2-10)',
+    'Many (11-100)',
+    'Abundant (100+)'];
+  String? dropdownValue;
+
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-        decoration: const InputDecoration(label: Text('How many did you see?')),
-        keyboardType: const TextInputType.numberWithOptions(signed: false),
-        maxLength: 1000,
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-        validator: (value) {
-          if (value?.isEmpty ?? true) {
-            return 'Please enter a non-zero number';
-          } else if (int.parse(value!) <= 0) {
-            return 'Please enter a positive number';
-          } else {
-            return null;
-          }
-        },
-        onSaved: (newValue) {
-          if (newValue?.isEmpty ?? true) {
-            widget.userReport.observationNumber = null;
-          } else {
-            widget.userReport.observationNumber = int.parse(newValue!);
-          }
-        });
+    return Column(
+      children:[
+        const Row(
+          children: [Text("How may did you see?")]
+        ),
+        Row(
+          children: [
+            SizedBox(
+              height: 70,
+              width: 210,
+              child:
+                DropdownButtonFormField<String>(
+                  items: _obsNumber.map((value) => DropdownMenuItem(
+                    value: value,
+                    child: Text(
+                      value
+                    ),
+                  )).toList(),
+                  // Update user report and value for display
+                  // when different selection is chosen
+                  onChanged: (String? value) {
+                    setState(() {
+                      widget.userReport.observationNumber = value!;
+                      dropdownValue = value;
+                    });
+                  },
+                  value: dropdownValue,
+                  hint: const Text("Select Option"),
+                  icon: const Icon(Icons.arrow_downward),
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      return 'Please make a selection';
+                    } else {
+                      return null;
+                    }
+                  },
+                )
+            )]
+        )]
+    );
   }
 }
