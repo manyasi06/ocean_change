@@ -174,6 +174,21 @@ flutter:
    - assets/map/12/641/
    - assets/map/12/642/
 
+   - assets/images/Dead_Dungeness_crabs_in_pots.png
+   - assets/images/dolphin.png
+   - assets/images/humbolt_squid.jpg
+   - assets/images/jellyfish_icon.png
+   - assets/images/mola_mola.jpg
+   - assets/images/Moon_jelly.png
+   - assets/images/notapplicable.png
+   - assets/images/opah.jpg
+   - assets/images/pyrozomes.png
+   - assets/images/Sea_nettle_jelly.png
+   - assets/images/starfish.jpg
+   - assets/images/trash.jpg
+   - assets/images/water_jelly_OSG.jpg
+   - assets/images/whale.jpg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

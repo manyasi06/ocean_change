@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 import '../../models/user_report.dart';
@@ -18,63 +20,92 @@ class ObservationFormField extends StatefulWidget {
 
 class _ObservationFormFieldState extends State<ObservationFormField> {
   late Observation chosenObservation;
+  late String observationImg;
 
   @override
   void initState() {
     super.initState();
     chosenObservation = widget.observationList.first;
     widget.userReport.observation = widget.observationList.first.name;
+    observationImg = getImageForObservation(widget.observationList.first.name)!;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Row(
-          children:[
-            Text('What did you see?'),
-          ]
-        ),
-        Row(
-          children: [
-            DropdownButton<String>(
-                value: widget.userReport.observation,
-                icon: const Icon(Icons.arrow_downward),
-                onChanged: (String? value) {
-                  setState(() {
-                    widget.userReport.observation = value!;
+    return Column(children: [
+      const Row(children: [
+        Text('What did you see?'),
+      ]),
+      Row(
+        children: [
+          DropdownButton<String>(
+            value: widget.userReport.observation,
+            icon: const Icon(Icons.arrow_downward),
+            onChanged: (String? value) {
+              setState(() {
+                widget.userReport.observation = value!;
 
-                    chosenObservation = widget.observationList.firstWhere(
-                        (element) =>
-                            element.name == widget.userReport.observation);
-                  });
-                },
-                items: widget.observationList
-                    .map<DropdownMenuItem<String>>((Observation observation) {
-                  return DropdownMenuItem<String>(
-                    value: observation.name,
-                    child: Text(observation.name),
-                  );
-                }).toList(),
-              ),
-          ],
-        ),
-        Padding(
-        padding: const EdgeInsets.only(left: 30.0, top: 10.0),
-        child: Column(
-          children: [
-            const Row(
-              children:[Text('Observation Details: ')]
-            ),
-            Row(
+                chosenObservation = widget.observationList.firstWhere(
+                    (element) => element.name == widget.userReport.observation);
+
+                observationImg = chosenObservation.name;
+              });
+            },
+            items: widget.observationList
+                .map<DropdownMenuItem<String>>((Observation observation) {
+              return DropdownMenuItem<String>(
+                value: observation.name,
+                child: Text(observation.name),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+      Row(
+        children: [
+          Expanded(
+              child: Image(
+            image: AssetImage(getImageForObservation(observationImg)),
+            fit: BoxFit.fill,
+            height: 150,
+          ))
+        ],
+      ),
+      Padding(
+          padding: const EdgeInsets.only(left: 30.0, top: 10.0),
+          child: Column(
               children: [
-                // Uses species_form_field.dart
-                SpeciesFormField(
-                  userReport: widget.userReport,
-                  chosenObservation: chosenObservation),
-            ])
-          ]
-        ))
+                const Row(
+                    children:[Text('Observation Details: ')]
+                ),
+                Row(
+                    children: [
+                      // Uses species_form_field.dart
+                      SpeciesFormField(
+                          userReport: widget.userReport,
+                          chosenObservation: chosenObservation),
+                    ])
+              ]
+          ))
     ]);
+  }
+
+  String getImageForObservation(String input) {
+    HashMap<String, String> imagesSpecies = HashMap();
+    final entries = {
+      'Dead crabs in pots': 'assets/images/Dead_Dungeness_crabs_in_pots.png',
+      'Dolphin': 'assets/images/dolphin.png',
+      'Jellyfish': 'assets/images/water_jelly_OSG.jpg',
+      'Moonfish/Opah': 'assets/images/opah.jpg',
+      'Ocean sunfish/Mola mola': 'assets/images/mola_mola.jpg',
+      'Pyrozomes': 'assets/images/pyrozomes.png',
+      'Squid': 'assets/images/humbolt_squid.jpg',
+      'Starfish': 'assets/images/starfish.jpg',
+      'Whale': 'assets/images/whale.jpg',
+      'Trash': 'assets/images/trash.jpg'
+    };
+    imagesSpecies.addAll(entries);
+    final displayImg = entries[input];
+    return displayImg ?? 'assets/images/notapplicable.png';
   }
 }
