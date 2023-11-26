@@ -187,7 +187,7 @@ flutter:
    - assets/images/starfish.jpg
    - assets/images/trash.jpg
    - assets/images/water_jelly_OSG.jpg
-   - assets/whale.jpg
+   - assets/images/whale.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

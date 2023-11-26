@@ -32,66 +32,61 @@ class _ObservationFormFieldState extends State<ObservationFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Row(
-          children:[
-            Text('What did you see?'),
-          ]
-        ),
-        Row(
-          children: [
-            DropdownButton<String>(
-                value: widget.userReport.observation,
-                icon: const Icon(Icons.arrow_downward),
-                onChanged: (String? value) {
-                  setState(() {
-                    widget.userReport.observation = value!;
+    return Column(children: [
+      const Row(children: [
+        Text('What did you see?'),
+      ]),
+      Row(
+        children: [
+          DropdownButton<String>(
+            value: widget.userReport.observation,
+            icon: const Icon(Icons.arrow_downward),
+            onChanged: (String? value) {
+              setState(() {
+                widget.userReport.observation = value!;
 
-                    chosenObservation = widget.observationList.firstWhere(
-                        (element) =>
-                            element.name == widget.userReport.observation);
+                chosenObservation = widget.observationList.firstWhere(
+                    (element) => element.name == widget.userReport.observation);
 
-                    observationImg = chosenObservation.name;
-                  });
-                },
-                items: widget.observationList
-                    .map<DropdownMenuItem<String>>((Observation observation) {
-                  return DropdownMenuItem<String>(
-                    value: observation.name,
-                    child: Text(observation.name),
-                  );
-                }).toList(),
-              ),
-          ],
-        ),
-        Row(
-          children: [
-            Expanded(child: Image(
-              image: AssetImage(getImageForObservation(observationImg)),
-              fit: BoxFit.fill,
-              height: 150,
-            ))
-
-          ],
-        ),
-        Row(
-        Padding(
-        padding: const EdgeInsets.only(left: 30.0, top: 10.0),
-        child: Column(
-          children: [
-            const Row(
-              children:[Text('Observation Details: ')]
-            ),
-            Row(
+                observationImg = chosenObservation.name;
+              });
+            },
+            items: widget.observationList
+                .map<DropdownMenuItem<String>>((Observation observation) {
+              return DropdownMenuItem<String>(
+                value: observation.name,
+                child: Text(observation.name),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+      Row(
+        children: [
+          Expanded(
+              child: Image(
+            image: AssetImage(getImageForObservation(observationImg)),
+            fit: BoxFit.fill,
+            height: 150,
+          ))
+        ],
+      ),
+      Padding(
+          padding: const EdgeInsets.only(left: 30.0, top: 10.0),
+          child: Column(
               children: [
-                // Uses species_form_field.dart
-                SpeciesFormField(
-                  userReport: widget.userReport,
-                  chosenObservation: chosenObservation),
-            ])
-          ]
-        ))
+                const Row(
+                    children:[Text('Observation Details: ')]
+                ),
+                Row(
+                    children: [
+                      // Uses species_form_field.dart
+                      SpeciesFormField(
+                          userReport: widget.userReport,
+                          chosenObservation: chosenObservation),
+                    ])
+              ]
+          ))
     ]);
   }
 
