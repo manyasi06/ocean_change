@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 import '../../models/user_report.dart';
@@ -18,12 +20,14 @@ class ObservationFormField extends StatefulWidget {
 
 class _ObservationFormFieldState extends State<ObservationFormField> {
   late Observation chosenObservation;
+  late String observationImg;
 
   @override
   void initState() {
     super.initState();
     chosenObservation = widget.observationList.first;
     widget.userReport.observation = widget.observationList.first.name;
+    observationImg = getImageForObservation(widget.observationList.first.name)!;
   }
 
   @override
@@ -45,6 +49,8 @@ class _ObservationFormFieldState extends State<ObservationFormField> {
                     chosenObservation = widget.observationList.firstWhere(
                         (element) =>
                             element.name == widget.userReport.observation);
+
+                    observationImg = chosenObservation.name;
                   });
                 },
                 items: widget.observationList
@@ -58,9 +64,14 @@ class _ObservationFormFieldState extends State<ObservationFormField> {
             ),
           ],
         ),
-        const Row(
+        Row(
           children: [
-          Image(image: AssetImage('assets/images/jellyfish_icon.png'))
+            Expanded(child: Image(
+              image: AssetImage(getImageForObservation(observationImg)),
+              fit: BoxFit.fill,
+              height: 150,
+            ))
+
           ],
         ),
         Row(
@@ -73,5 +84,24 @@ class _ObservationFormFieldState extends State<ObservationFormField> {
         )
       ],
     );
+  }
+
+  String getImageForObservation(String input) {
+    HashMap<String, String> imagesSpecies = HashMap();
+    final entries = {
+      'Dead crabs in pots': 'assets/images/Dead_Dungeness_crabs_in_pots.png',
+      'Dolphin': 'assets/images/dolphin.png',
+      'Jellyfish': 'assets/images/water_jelly_OSG.jpg',
+      'Moonfish/Opah': 'assets/images/opah.jpg',
+      'Ocean sunfish/Mola mola': 'assets/images/mola_mola.jpg',
+      'Pyrozomes': 'assets/images/pyrozomes.png',
+      'Squid': 'assets/images/humbolt_squid.jpg',
+      'Starfish': 'assets/images/starfish.jpg',
+      'Whale': 'assets/images/whale.jpg',
+      'Trash': 'assets/images/trash.jpg'
+    };
+    imagesSpecies.addAll(entries);
+    final displayImg = entries[input];
+    return displayImg ?? 'assets/images/notapplicable.png';
   }
 }
