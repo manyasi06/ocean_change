@@ -9,3 +9,4 @@
 - 11/19/23 Changed number of observations to a dropdown. Maintained working validation.
 - 11/26/23 Add the migration to add uuid data to the user
 - 11/26/23 Add the assets and images to the preview
+- 11/26/23 Changed map frame to un-hide areas under bottom bar
