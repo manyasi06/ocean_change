@@ -58,6 +58,11 @@ class _ObservationFormFieldState extends State<ObservationFormField> {
             ),
           ],
         ),
+        const Row(
+          children: [
+          Image(image: AssetImage('assets/images/jellyfish_icon.png'))
+          ],
+        ),
         Row(
           children: [
             const Text('Observation Details: '),
