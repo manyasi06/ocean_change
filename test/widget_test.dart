@@ -7,12 +7,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ocean_change/app.dart';
-import 'package:ocean_change/constants.dart';
 import 'package:ocean_change/screens/login_screen.dart';
 import 'package:ocean_change/widgets/map/export_csv_screen.dart';
 
- // TODO this test is broken
 
 void main() {
 
