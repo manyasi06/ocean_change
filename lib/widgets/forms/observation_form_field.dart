@@ -30,12 +30,14 @@ class _ObservationFormFieldState extends State<ObservationFormField> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Row(
+          children:[
+            Text('What did you see?'),
+          ]
+        ),
         Row(
           children: [
-            const Text('What did you see?'),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: DropdownButton<String>(
+            DropdownButton<String>(
                 value: widget.userReport.observation,
                 icon: const Icon(Icons.arrow_downward),
                 onChanged: (String? value) {
@@ -55,7 +57,6 @@ class _ObservationFormFieldState extends State<ObservationFormField> {
                   );
                 }).toList(),
               ),
-            ),
           ],
         ),
         const Row(
@@ -64,14 +65,22 @@ class _ObservationFormFieldState extends State<ObservationFormField> {
           ],
         ),
         Row(
+        Padding(
+        padding: const EdgeInsets.only(left: 30.0, top: 10.0),
+        child: Column(
           children: [
-            const Text('Observation Details: '),
-            SpeciesFormField(
-                userReport: widget.userReport,
-                chosenObservation: chosenObservation),
-          ],
-        )
-      ],
-    );
+            const Row(
+              children:[Text('Observation Details: ')]
+            ),
+            Row(
+              children: [
+                // Uses species_form_field.dart
+                SpeciesFormField(
+                  userReport: widget.userReport,
+                  chosenObservation: chosenObservation),
+            ])
+          ]
+        ))
+    ]);
   }
 }
