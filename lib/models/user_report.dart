@@ -5,7 +5,7 @@ class UserReport {
   GeoPoint? geopoint;
   String? observation;
   String? species;
-  num? observationNumber;
+  String? observationNumber;
   String? waterColor;
   num? waterTemp;
   bool? temperatureBreak;
