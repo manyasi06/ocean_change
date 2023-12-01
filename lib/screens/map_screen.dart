@@ -170,8 +170,11 @@ class MapScreenState extends State<MapScreen> {
                         builder: (context) =>
                             ReportMarkerIcon(observation: report.observation)));
                   }
-                  return BaseMap(
-                      reportMarkers: reportMarkers, adminStatus: adminStatus);
+                  return Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 98.0),
+                      child: BaseMap(
+                          reportMarkers: reportMarkers, adminStatus: adminStatus)
+                  );
                 } else {
                   return const Center(child: CircularProgressIndicator());
                 }
