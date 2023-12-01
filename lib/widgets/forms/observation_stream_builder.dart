@@ -5,6 +5,8 @@ import '../../models/observation.dart';
 import '../../models/user_report.dart';
 import 'observation_form_field.dart';
 
+// Stream builder pulls data from firestore database
+
 class ObservationStreamBuilder extends StatelessWidget {
   const ObservationStreamBuilder({
     super.key,

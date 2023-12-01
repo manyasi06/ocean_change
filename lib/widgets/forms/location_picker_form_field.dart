@@ -8,6 +8,9 @@ import '../../screens/location_picker_screen.dart';
 
 import '../../models/user_report.dart';
 
+
+// Handles the location picker.
+
 class LocationPickerFormField extends StatefulWidget {
   final UserReport userReport;
 

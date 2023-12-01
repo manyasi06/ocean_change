@@ -6,6 +6,9 @@ import '../../models/activity.dart';
 
 import 'activity_form_field.dart';
 
+// Stream builder pulls data from firestore database
+// This pulls the data for the dropdown of "What were you doing today?" section
+
 class ActivityStreamBuilder extends StatelessWidget {
   const ActivityStreamBuilder({super.key, required this.userReport});
 

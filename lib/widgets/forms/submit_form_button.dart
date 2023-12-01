@@ -33,6 +33,8 @@ class _SubmitFormButton extends State<SubmitFormButton> {
   }
 
   Future<String> uploadImage(File image) async {
+    // This is the section that requires internet connection
+    // Create file name for image to be uploaded
     int uniqueFileId = DateTime.now().millisecondsSinceEpoch;
     String fileName =
         '${widget.userReport.observation!}${DateFormat('MMddyyyy').format(widget.userReport.date!)}$uniqueFileId.jpg';
@@ -69,9 +71,13 @@ class _SubmitFormButton extends State<SubmitFormButton> {
 
                       String? imageUrl;
                       if (widget.image != null) {
+                        // Takes image url from firebase storage location
+                        // to be uploaded in the report
                         imageUrl = await uploadImage(widget.image!);
                       }
-
+                      // Line below this will handle updating as internet
+                      // connection is available. However, the imageurl is handled
+                      // above, and that function does not have the same ability
                       FirebaseFirestore.instance.collection('reports').add({
                         'observation': widget.userReport.observation,
                         'species': widget.userReport.species,

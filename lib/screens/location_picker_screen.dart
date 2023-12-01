@@ -9,6 +9,10 @@ import '../models/user_report.dart';
 import '../widgets/forms/location_picker/lat_long_box.dart';
 import '../widgets/forms/location_picker/lat_long_target.dart';
 
+// Map screen for the location picker in the user report.
+// Note: This is a different instance of the map screen shown on the main app
+// screen, but the maps should look the same
+
 class LocationPickerScreen extends StatefulWidget {
   static const String routeName = 'LocationPickerScreen';
 

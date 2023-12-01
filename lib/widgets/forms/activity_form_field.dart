@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../models/activity.dart';
 import '../../models/user_report.dart';
 
+// For selecting the "What were you doing today?" section
+
 class ActivityFormField extends StatefulWidget {
   const ActivityFormField(
       {super.key, required this.userReport, required this.activityList});

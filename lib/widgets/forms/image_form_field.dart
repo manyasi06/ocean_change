@@ -7,6 +7,8 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../models/user_report.dart';
 
+// Allows user to select image
+
 class ImageFormField extends StatefulWidget {
   const ImageFormField(
       {super.key,
