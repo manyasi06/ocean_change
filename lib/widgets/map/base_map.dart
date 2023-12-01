@@ -44,12 +44,11 @@ class _BaseMapState extends State<BaseMap> {
         },
         crs: const Epsg3857(),                 //coordinate reference system
         center: LatLng(44.1, -124.75),
-        //boundsOptions: const FitBoundsOptions(padding: EdgeInsets.all(8.0)),
         zoom: 10.0,
         minZoom: 7.0,
         maxZoom: 12.0,
 
-        maxBounds: LatLngBounds(LatLng(41.9, -127.0), LatLng(46.3, -123.50)), //LatLng(46.3, -123.50), LatLng(44, -124)
+        maxBounds: LatLngBounds(LatLng(41.9, -127.0), LatLng(46.3, -123.50)),
         nePanBoundary: LatLng(46.3, -123.50),
         swPanBoundary: LatLng(41.9, -127.0),
         interactiveFlags: InteractiveFlag.doubleTapZoom |

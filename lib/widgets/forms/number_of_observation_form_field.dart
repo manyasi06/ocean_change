@@ -24,7 +24,7 @@ class _NumberOfObservationFormFieldState extends State<NumberOfObservationFormFi
     return Column(
       children:[
         const Row(
-          children: [Text("How may did you see?")]
+          children: [Text("How many did you see?")]
         ),
         Row(
           children: [
